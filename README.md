@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Image Generation & Printing API
 
 A modern, scalable FastAPI application for AI-powered image generation and mockup printing using Google's Gemini AI.
@@ -246,3 +247,7 @@ For support, please open an issue in the GitHub repository or contact the develo
 # Major_Project01
 this is our project.
 >>>>>>> b71b2b694f6eb1b4444ef47c94c9b3edddbc9ab7
+=======
+# Criminal_Sketch
+this is our project.
+>>>>>>> 0d8ff8e3dd6eb7ca74e03d629c39d5add7b4913a

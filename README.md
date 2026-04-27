@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Image Generation & Printing API
 
 A modern, scalable FastAPI application for AI-powered image generation and mockup printing using Google's Gemini AI.
@@ -241,3 +242,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 For support, please open an issue in the GitHub repository or contact the development team.
+=======
+# Major_Project01
+this is our project.
+>>>>>>> b71b2b694f6eb1b4444ef47c94c9b3edddbc9ab7

@@ -1,0 +1,143 @@
+﻿Demo Plan
+Sequence of Demos
+First: #3
+Second: #1
+Third: #2
+Demo 1: During the Development Phase
+Audience: Platform engineers, DevOps leads, and ML infrastructure teams
+
+
+Goal: Show how easy it is to create ModelKits at milestones and share versions with team members.
+
+
+Outline:
+* Show a new ML project being moved to ModelKits
+   * Add PyKitOps to Jupyter Notebook
+   * Show generation of ModelKit
+   * Show security scanning, signing, explain attestation
+   * Show sharing in Jozu Hub (docker run)
+* Show a fine tuning LLM project in ModelKit
+   * Import from HF
+   * Add PyKitOps to MLFlow
+   * Run experiments
+   * Show ModelKits appearing in Jozu Hub
+   * Show security scanning, signing, explain attestation
+   * Show sharing in Jozu Hub (pull) and kit dev start
+Demo 2: Production Deployment & Rollback
+Audience: Platform engineers, DevOps leads, and ML infrastructure teams
+
+
+Goal: Show how lessons and tools from application DevOps can bring security, governance, and acceleration to production operations for AI models and agents.
+Description:
+This session reveals how leading enterprises solve the "last mile" problem of AI deployment through practical governance that doesn't slow down data science teams. We'll show real examples of organizations reducing compliance prep time by 87% while actually accelerating their AI delivery velocity, and demo how easy it is to move a model from a Jupyter Notebook into a deployable artifact.
+
+
+What you'll learn:
+* Why traditional MLOps platforms fail at production governance (and why you’re better off mirroring proven application DevOps approaches)
+* Why the OCI registry is the most secure “heart” of your DevSecOps for AI approach
+* The hidden costs of manual security reviews and how automated attestation changes the game
+* Why you should be thinking about rollbacks when you deploy your first model into production, now when things break (any why a 7x faster model load time matters…especially for rollbacks!)
+* Case study: How a secure organization brought security to their agent development, and accelerated development cycles by 41%
+Outline:
+* Show a fine-tuned LLM in MLFlow being turned into a ModelKit
+   * Explain tamper-proof storage and its value
+   * Explain value of storing in the OCI registry rather than S3 or other location
+* Show Jozu Hub
+   * Show versioning and explain one potential label set:
+      * Champion - the current in-production model
+      * Challenger - the expected-to-better upcoming model (not yet in production)
+      * Control - the last known good model that preceded the Champion (needed in case you want to roll back due to a Champion issue rather than roll forward to Challenger)
+   * Show signing status, and security scanning / attestation
+   * Explain AI SBOM
+* Show deployment tab
+   * Explain how Jozu Hub gets integrated into a CI deployment and why that’s better
+   * Show deployment is blocked with an OPA agent in the pipeline (trying to deploy a model that wasn’t security scanned)
+* Show deployment succeed
+* Show rollback to known good model and how fast it was
+What’s Needed
+* MLFlow in a local-looking cloud instance (ec2 / GCP equivalent)
+* Can use Jozu Hub SaaS for registry
+* Setup security scanning for a special demo repo in Jozu Hub SaaS (Jozu Team)
+* Need a pipeline on Jozu Hub SaaS to create attestation for security reports in jozu repos (Jozu Team)
+* CI/CD system - use Dagger or maybe ArgoCD?
+* Kube cluster for deploying to (GCP?)
+Demo 3: Jozu & Kserve
+Based on this blog: https://jozu.com/blog/whats-wrong-with-your-kserve-setup-and-how-to-fix-it/
+
+
+Audience: Kserve administrators and users
+
+
+Goal: Show how Jozu can bring security and efficiency to Kserve production environments on Kubernetes.
+Description:
+This session will show how to avoid the weaknesses of Kserve and how Jozu fixes them:
+
+
+Comparison: S3 + Kserve versus Jozu + Kserve
+Capability
+	S3 + Kserve (Today)
+	Jozu + Kserve (Enterprise-Ready)
+	Versioning
+	Filenames (model_v2_final.pkl) - mutable and inconsistent
+	Immutable versions with semantic tags + SHA digests
+	Security Scanning
+	None. Manual CVE checks at best
+	Automatic scans for CVEs, code injection, and LLM-specific risks
+	Governance
+	Anyone with Kserve access can deploy anything
+	Policy enforcement, approvals, environment restrictions
+	Auditability
+	No history, no lineage
+	Full audit trails: who deployed what, when, and why
+	Rollback
+	Error-prone manual file hunting in S3
+	Deterministic rollback to any previous version
+	Compliance
+	No controls, no reports
+	HIPAA, GDPR, SOC2, NIST-ready with attested artifacts
+	Integration
+	Manual
+	Works with all MLOps and DevOps tools
+	
+
+What you'll learn:
+* Why relying on Kserve + S3, while simple, is not the ideal
+* How to address common Kserve gaps with Jozu
+* How to add Jozu to your Kserve environment
+* How to handle rollbacks, security scans, versioning/tagging, and auditing
+Outline
+* Show an S3 bucket with at least a dozen models saved with semi-structured file names
+* Show the Kserve configuration for deploying those files
+* Show how to use Kserve + S3
+   * Do a rollback (how to identify the last good model)
+   * Try and find all the models with vulnerabilities
+* Show the same set of models, properly tagged, in Jozu Hub
+   * Show that they’ve all been security scanned
+* Show how to configure Kserve with Jozu
+* Show how to use Kserve + Jozu
+   * Do a rollback (simple to identify last good model)
+   * Show security scan results
+What’s Needed
+* MLFlow in a local-looking cloud instance (ec2 / GCP equivalent)
+* Can use Jozu Hub SaaS for registry
+* Setup security scanning for a special demo repo in Jozu Hub SaaS (Jozu Team)
+* Need a pipeline on Jozu Hub SaaS to create attestation for security reports in jozu repos (Jozu Team)
+* Kubernetes cluster in GCP with Kserve
+* S3 bucket with authentication
+Demo 4: Air-Gapped AI: Deploying Models in High-Security Environments
+Audience: Platform engineers, DevOps leads, and ML infrastructure teams
+
+
+Description: Government agencies, financial institutions, and enterprises with strict data governance requirements can't rely on cloud-based AI platforms. But that doesn't mean sacrificing deployment speed, security scanning, or audit capabilities.
+
+
+Join us for a technical walkthrough of deploying enterprise AI in completely disconnected environments—from secure facilities to tactical edge locations. We'll demonstrate real implementations used by government agencies and regulated industries.
+
+
+What you'll learn:
+* Architecture patterns for fully air-gapped AI deployment pipelines
+* How to maintain security scanning and vulnerability assessment without internet connectivity
+* Registry synchronization strategies for distributing models across secure enclaves
+* Real deployment: Setting up a complete AI pipeline in a private Kubernetes environment
+* Compliance automation for NIST AI RMF, EU AI Act, and government security standards
+Demo 4: Deploying to multiple clouds
